@@ -162,7 +162,7 @@ Code:
 ### 2-Cycle Counter
 
 ![Structure](images/image-21.png)
-![Block diagram](images/image-22.png)
+![BlockDiagram](images/image-22.png)
 ![Waveform](images/image-23.png)
 
 MakerChip [Link](https://myth.makerchip.com/sandbox/0zpfRhoN2/0zmhMv6#)
@@ -187,8 +187,8 @@ Code:
       
       @2
          $valid = $cnt;
-         $sel_line = $reset || ~$valid;
-         $out[31:0] = $sel_line ? 32'b0 : !$op[1] ? !$op[0] ? $sum[31:0] : $diff[31:0] : !$op[0] ? $prod[31:0] : $quot[31:0] ;
+         $reset_line = $reset || ~$valid;
+         $out[31:0] = $reset_line ? 32'b0 : !$op[1] ? !$op[0] ? $sum[31:0] : $diff[31:0] : !$op[0] ? $prod[31:0] : $quot[31:0] ;
 
    
    // Assert these to end simulation (before Makerchip cycle limit).
