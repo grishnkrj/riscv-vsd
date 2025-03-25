@@ -4,8 +4,8 @@
 
 ### Simple MUX
 
-![Structure](image-1.png)
-![Waveform](image-3.png)
+![Structure](images/image-1.png)
+![Waveform](images/image-3.png)
 
 The TL verilog code for this is
 
@@ -16,7 +16,7 @@ $out = $sel ? $in1 : $in0 ;
 ### 8-bit MUX
 
 ![Structure](image.png)
-![Waveform](image-2.png)
+![Waveform](images/image-2.png)
 
 The TL verilog code for this is
 
@@ -26,8 +26,8 @@ The TL verilog code for this is
 
 ## Combinational Calculator
 
-![Structure](image-4.png)
-![Waveform](image-5.png)
+![Structure](images/image-4.png)
+![Waveform](images/image-5.png)
 
 The TL verilog code for this is
 
@@ -51,8 +51,8 @@ MakerIDE Project of this [Calculator](https://myth.makerchip.com/sandbox/0zpfRho
 
 ### Fibonacci Series
 
-![Structure](image-8.png)
-![Waveform](image-7.png)
+![Structure](images/image-8.png)
+![Waveform](images/image-7.png)
 
 Code:
 
@@ -62,8 +62,8 @@ Code:
 
 ### Free Running Counter
 
-![Structure](image-9.png)
-![Waveform](image-10.png)
+![Structure](images/image-9.png)
+![Waveform](images/image-10.png)
 
 Code:
 
@@ -73,8 +73,8 @@ $count[31:0] = $reset ? 0 : ( 1 + >>1$count);
 
 ### Sequential Calculator
 
-![Structure](image-11.png)
-![Waveform](image-12.png)
+![Structure](images/image-11.png)
+![Waveform](images/image-12.png)
 
 Code:
 
@@ -94,11 +94,11 @@ Code:
 
 ### Pythagoras Calculator
 
-![Structure](image-13.png)
+![Structure](images/image-13.png)
 
-![Waveform](image-14.png)
+![Waveform](images/image-14.png)
 
-![Diagram](image-15.png)
+![Diagram](images/image-15.png)
 
 Code:
 
@@ -117,11 +117,11 @@ Code:
 ### Fibonacci 
 
 
-![Structure](image-16.png)
+![Structure](images/image-16.png)
 
-![Waveform](image-17.png)
+![Waveform](images/image-17.png)
 
-![Diagram](image-18.png)
+![Diagram](images/image-18.png)
 
 Code:
 
@@ -138,11 +138,11 @@ Code:
 
 #### Question
 
-![Question](image-19.png)
+![Question](images/image-19.png)
 
 #### Solution
 
-![Solution](image-20.png)
+![Solution](images/image-20.png)
 
 Code:
 
@@ -161,4 +161,38 @@ Code:
 
 ### 2-Cycle Counter
 
-![Structure](image-21.png)
+![Structure](images/image-21.png)
+![Block diagram](images/image-22.png)
+![Waveform](images/image-23.png)
+
+MakerChip [Link](https://myth.makerchip.com/sandbox/0zpfRhoN2/0zmhMv6#)
+
+Code:
+
+```tlveriilog
+\TLV
+   |calc
+      @0
+         $reset = *reset;
+
+      @1   
+         $val1[31:0] = >>2$out ;
+         $val2[31:0] = $rand2[2:0] ;
+         
+         $sum[31:0] = $val1[31:0] + $val2[31:0] ;
+         $prod[31:0] = $val1[31:0] * $val2[31:0] ;
+         $diff[31:0] = $val1[31:0] - $val2[31:0] ;
+         $quot[31:0] = $val1[31:0] / $val2[31:0] ;
+         $cnt = $reset ? 0 : (1'b1 + >>1$cnt);
+      
+      @2
+         $valid = $cnt;
+         $sel_line = $reset || ~$valid;
+         $out[31:0] = $sel_line ? 32'b0 : !$op[1] ? !$op[0] ? $sum[31:0] : $diff[31:0] : !$op[0] ? $prod[31:0] : $quot[31:0] ;
+
+   
+   // Assert these to end simulation (before Makerchip cycle limit).
+   *passed = *cyc_cnt > 40;
+   *failed = 1'b0;
+
+```
