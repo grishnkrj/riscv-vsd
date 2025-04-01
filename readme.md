@@ -15,7 +15,7 @@ $out = $sel ? $in1 : $in0 ;
 
 ### 8-bit MUX
 
-![Structure](image.png)
+![Structure](images/image.png)
 ![Waveform](images/image-2.png)
 
 The TL verilog code for this is
